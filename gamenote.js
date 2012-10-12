@@ -18,22 +18,45 @@ Quintus.GameNote = function(Q) {
     points: function() {
       var container = this.insert(new Q.UI.Container({ w: "75%", h: 600, radius: 20, opacity:0.7, shadow: true, type:0 }));
 
+      var stage = this;
+
       var origY = container.p.y;
-      container.add("tween").set({opacity: 0, y: -container.p.h }).animate({ opacity: 0.7, y: 20 },1,Q.Easing.Quadratic.InOut);
+      container.add("tween").set({opacity: 0, y: -container.p.h }).animate({ opacity: 0.7, y: 20 },1,Q.Easing.Quadratic.InOut, {
+        callback: function() { 
+          stage.trigger("point",0);
+        }
+      
+      });
+      this.pointsList = [];
     },
 
     point: function(text,options) {
       this.nextPoint = this.nextPoint || 50;
+
+      var pointNum = this.pointsList.length;
 
       var pt = new Q.UI.Text({ 
         x: 200,
         y: this.nextPoint,
         label: text,
         size: 32,
-        maxWidth: 500
+        maxWidth: 500,
+        opacity: 0
       }).add("tween");
 
       this.nextPoint += pt.p.h + 20;
+
+      this.pointsList.push(pt);
+      var stage = this;
+
+      this.on("point",pt,function(num) {
+        if(pointNum == num) {
+          pt.animate({ opacity: 1},1,Q.Easing.Quadratic.In, { callback: function() {
+            stage.trigger("point",num + 1);
+          }});
+        }
+      });
+
       this.insert(pt);
     }
 
