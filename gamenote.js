@@ -16,24 +16,53 @@ Quintus.GameNote = function(Q) {
 
 
     points: function() {
-      var container = this.insert(new Q.UI.Container({ w: "75%", h: 600, radius: 20, opacity:0.7, shadow: true, type:0 }));
+      var container = this.insert(new Q.PointContainer());
 
       var stage = this;
 
       var origY = container.p.y;
-      container.add("tween").set({opacity: 0, y: -container.p.h }).animate({ opacity: 0.7, y: 20 },1,Q.Easing.Quadratic.InOut, {
+      container.add("tween").set({opacity: 0, y: -container.p.h }).animate({ opacity: 0.9, y: 70 },1,Q.Easing.Quadratic.InOut, {
+
         callback: function() { 
-          stage.trigger("point",0);
+          stage.isVisible = true;
+          if(stage.titlePoint) {
+            stage.titlePoint.animate({ opacity: 1 });
+          }
         }
       
       });
+      this.container = container;
       this.pointsList = [];
     },
 
-    point: function(text,options) {
-      this.nextPoint = this.nextPoint || 50;
+    title: function(text) {
+      this.nextPoint = this.nextPoint || (this.container ? 104 : 40);
 
-      var pointNum = this.pointsList.length;
+      var pt = new Q.UI.Text({ 
+        x: 512,
+        y: this.nextPoint,
+        label: text,
+        size: 48,
+        w: 640,
+        align: "center",
+        opacity: 0
+      }).add("tween");
+
+      this.titlePoint = this.insert(pt);
+
+      this.nextPoint += pt.p.h + 20;
+
+      if(!this.container) {
+        pt.animate({ opacity: 1.0 });
+      }
+
+      return pt;
+    },
+
+    point: function(text,options) {
+      this.nextPoint = this.nextPoint || 104
+
+      var pointNum = this.pointsList && this.pointsList.length;
 
       var pt = new Q.UI.Text({ 
         x: 200,
@@ -46,20 +75,47 @@ Quintus.GameNote = function(Q) {
 
       this.nextPoint += pt.p.h + 20;
 
-      this.pointsList.push(pt);
-      var stage = this;
+      if(this.pointsList) {
+        this.pointsList.push(pt);
+        var stage = this;
+
+        pt.hidden = true;
+      }
+
+
+      if(!this.container) {
+        pt.hidden = false;
+        pt.p.w = 1024;
+        pt.p.x = 512;
+        pt.p.align = 'center'
+        pt.animate({ opacity: 1.0 },null,null,{ delay: 1 });
+      }
 
       this.on("point",pt,function(num) {
         if(pointNum == num) {
-          pt.animate({ opacity: 1},1,Q.Easing.Quadratic.In, { callback: function() {
-            stage.trigger("point",num + 1);
-          }});
+          pt.hidden = false;
+          pt.animate({ opacity: 1},1,Q.Easing.Quadratic.In);
         }
       });
 
-      this.insert(pt);
+      this.on("hidePoint",pt,function(num) {
+        if(pointNum == num) {
+          pt.hidden = true;
+          pt.animate({ opacity: 0 },1,Q.Easing.Quadratic.In);
+        }
+      });
+
+     return this.insert(pt);
     }
 
+  });
+
+  Q.UI.Container.extend("PointContainer",{
+    init: function() {
+      this._super({
+        w: "75%", h: 600, radius: 20, opacity:1, shadow: true, type:0
+      });
+    }
   });
 
   
@@ -68,7 +124,7 @@ Quintus.GameNote = function(Q) {
 
     Q.scene("slide" + number, function(stage) {
       Q.currentSlide = number;
-      stage.insert(new Q.Presenter());
+      stage.presenter = stage.insert(new Q.Presenter());
       sceneFunc(stage);
       stage.add("viewport, tween");
       stage.moveTo(null,768 - Q.height);
@@ -79,6 +135,8 @@ Quintus.GameNote = function(Q) {
   Q.activeSlideStage = 0;
 
   Q.transitionSlide = function(from,to) {
+    window.location.hash = "slide" + to;
+
     if(Q.inTransition) return;
 
     if(to < 1) {
@@ -121,7 +179,7 @@ Quintus.GameNote = function(Q) {
     init: function() {
       this._super({ 
         x: 0,
-        y: 360,
+        y: 470,
         z: 10,
         sprite: "player",
         sheet: "man",
@@ -136,12 +194,14 @@ Quintus.GameNote = function(Q) {
                 ]
       });
 
+      this.triggered = {};
+
       this.add("2d, platformerControls, animation");
     },
 
     step: function(dt) {
       this._super(dt);
-      if(this.p.landed > 0) {
+      if(this.p.landed >= 0) {
         if(this.p.vx > 0) {
           this.play("run_right");
         } else if(this.p.vx < 0) {
@@ -173,6 +233,24 @@ Quintus.GameNote = function(Q) {
         Q.transitionSlide(Q.currentSlide, Q.currentSlide + 1);
       }
 
+      
+      if(this.parent.pointsList && this.parent.isVisible) { 
+        var len = this.parent.pointsList.length;
+        for(var i = 0;i < len;i++) {
+          var point = this.parent.pointsList[i];
+
+          if(this.p.x / 1024 > (i * 1.0 / len) ) {
+            if(!this.triggered[i]) {
+              this.parent.trigger("point",i);
+              this.triggered[i] = true;
+            }
+          } else if(!this.parent.pointsList[i].hidden) {
+            this.parent.trigger("hidePoint",i);
+            this.triggered[i] = false
+          }
+        }
+      }
+
     }
 
   });
@@ -190,19 +268,22 @@ Quintus.GameNote = function(Q) {
       });
   //  Q.touch(Q.SPRITE_UI,1);
 
-    Q.load(['sprites.png','sprites.json','game-background.png',
-            'level.json', 'level2.json'], function() {
- 
-      Q.compileSheets("sprites.png","sprites.json");
-      Q.animations('player', {
-         run_right: { frames: [0,1,2,3,4,5], rate: 1/8},
-         run_left: { frames: [6,7,8,9,10,11], rate: 1/8},
-         stand_right: { frames: [2], rate: 1/5},
-         stand_left: { frames: [8], rate: 1/5},
-         fly_right: { frames: [2], rate: 1/5},
-         fly_left: { frames: [8], rate: 1/5}
-      });
-      Q.stageScene("slide1");
+    Q.preload(function() {
+      Q.presentationSetup();
+
+      var sceneName;
+
+      if(window.location.hash !== "") {
+        sceneName = window.location.hash.split("#")[1];
+      } else {
+        Q.stageScene("slide1");
+      }
+      
+      if(sceneName && Q.scene(sceneName)) { 
+        Q.stageScene(sceneName);
+      } else {
+        Q.stageScene("slide1");
+      }
 
     });
 
