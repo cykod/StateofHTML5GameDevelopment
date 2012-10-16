@@ -35,10 +35,11 @@ Quintus.GameNote = function(Q) {
       this.pointsList = [];
     },
 
-    title: function(text) {
+    title: function(text,p) {
       this.nextPoint = this.nextPoint || (this.container ? 104 : 40);
+      this.titleCount = this.titleCount || 0;
 
-      var pt = new Q.UI.Text({ 
+      var pt = new Q.UI.Text(p,{ 
         x: 512,
         y: this.nextPoint,
         label: text,
@@ -49,22 +50,27 @@ Quintus.GameNote = function(Q) {
       }).add("tween");
 
       this.titlePoint = this.insert(pt);
+      this.titleCount++;
 
-      this.nextPoint += pt.p.h + 20;
+      this.nextPoint += pt.p.h;
+      if(this.container ) {
+        this.nextPoint += 20;
 
-      if(!this.container) {
-        pt.animate({ opacity: 1.0 });
       }
+
+      if(!this.container && this.titleCount == 1) {
+        pt.animate({ opacity: 1.0 },null,null, { delay: 0.75 * this.titleCount });
+      } 
 
       return pt;
     },
 
-    point: function(text,options) {
+    point: function(text,p) {
       this.nextPoint = this.nextPoint || 104
 
       var pointNum = this.pointsList && this.pointsList.length;
 
-      var pt = new Q.UI.Text({ 
+      var pt = new Q.UI.Text(p,{ 
         x: 200,
         y: this.nextPoint,
         label: text,
@@ -88,7 +94,8 @@ Quintus.GameNote = function(Q) {
         pt.p.w = 1024;
         pt.p.x = 512;
         pt.p.align = 'center'
-        pt.animate({ opacity: 1.0 },null,null,{ delay: 1 });
+        pt.animate({ opacity: 1.0 },null,null,{ delay: 1.5 });
+
       }
 
       this.on("point",pt,function(num) {
@@ -156,6 +163,8 @@ Quintus.GameNote = function(Q) {
 
     Q(".platformerControls",oldStageNumber).destroy();
 
+    Q.stage(oldStageNumber).trigger("clear");
+
     if(from < to) {
       // Next Slide
       newStage.moveTo(-1024).animate({ x: 0 }, 0.5, Q.Easing.Quadratic.InOut);
@@ -195,6 +204,7 @@ Quintus.GameNote = function(Q) {
       });
 
       this.triggered = {};
+      this.triggeredPercentage = {};
 
       this.add("2d, platformerControls, animation");
     },
@@ -239,7 +249,7 @@ Quintus.GameNote = function(Q) {
         for(var i = 0;i < len;i++) {
           var point = this.parent.pointsList[i];
 
-          if(this.p.x / 1024 > (i * 1.0 / len) ) {
+          if((this.p.x-50.0) / (1024-100) > (i / len) ) {
             if(!this.triggered[i]) {
               this.parent.trigger("point",i);
               this.triggered[i] = true;
@@ -251,6 +261,14 @@ Quintus.GameNote = function(Q) {
         }
       }
 
+      for(var i = 0;i < 10; i++) {
+        if(this.p.x / 1024 > (i / 10) ) {
+            if(!this.triggeredPercentage[i]) {
+              this.parent.trigger(i * 10 + "%");
+              this.triggeredPercentage[i] = true;
+            }
+        }
+      }
     }
 
   });
@@ -285,6 +303,22 @@ Quintus.GameNote = function(Q) {
         Q.stageScene("slide1");
       }
 
+      /*
+      // Fullscreen is slower...
+      var goFullscreen = function() {
+        var rfs =
+          Q.el.requestFullScreen
+          || Q.el.webkitRequestFullScreen
+          || Q.el.mozRequestFullScreen
+        ;
+        rfs.call(Q.el);
+
+        Q.el.removeEventListener("click",goFullscreen);
+      };
+
+
+      Q.el.addEventListener("click",goFullscreen);
+      */
     });
 
     return Q;

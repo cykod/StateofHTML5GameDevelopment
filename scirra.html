@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<style>
+body, html { padding:0px; margin:0px; font-size:1.25em; font-family:arial; }
+.perfresults td {
+	border-bottom: solid 1px #ddd;
+	font-size: 0.83em;
+	padding: 5px;
+}
+
+.perfnotes {
+	font-size: 0.7em !important;
+	width: 200px;
+}
+
+.perfscoretitle {
+	color: black;
+}
+
+.perfscore {
+	width: 90px;
+	margin-right: 5px;
+	color: #fff;
+}
+
+.perfbar {
+	background-color: #292;
+	height: 25px;
+	float: left;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	padding:2px;
+	padding-left:7px;
+	font-size:1em;
+	line-height:25px;
+}
+
+.perfright {
+	color:#888;
+}
+
+.perftoprow td {
+	background-color: #efefef;
+	text-shadow: 0 1px 1px #fff;
+}
+
+a { color:black; }
+</style>
+<div style='width:100%; height:330px; overflow:auto; -webkit-overflow-scrolling: touch;'>
+  Source: <a href='https://www.scirra.com/blog/85/the-great-html5-mobile-gaming-performance-comparison' target='_blank'>Scirra.com</a> (<a href='http://www.scirra.com/construct2'>Makers of Construct2</a>) | <a href='https://www.scirra.com/arcade/addicting-action-games/12/space-blaster' target='_blank'>Test Demo</a>
+<table class="perfresults" cellspacing=0>
+<tr class="perftoprow"><td><strong>Device</strong></td>	<td><strong>Technology</strong></td>	<td><strong>Notes</strong></td> <td class="perfscoretitle"><strong>Score</strong></td></tr>
+<tr><td>Desktop</td>			<td>Chrome 19</td>			<td></td>						<td class="perfscore"><div class="perfbar" style="width: 100%">60</div></td></tr>
+<tr><td>Desktop</td>			<td>Firefox 13</td>			<td></td>						<td class="perfscore"><div class="perfbar" style="width: 100%">64</div></td></tr>
+<tr><td>Desktop</td>			<td>IE9</td>				<td></td>						<td class="perfscore"><div class="perfbar" style="width: 100%">60</div></td></tr>
+<tr><td>Desktop</td>			<td>Safari 5.1</td>			<td></td>						<td class="perfscore"><div class="perfbar" style="width: 43%">26</div></td></tr>
+<tr><td>Desktop</td>			<td>Opera 12 beta</td>		<td></td>						<td class="perfscore"><div class="perfbar" style="width: 45%">27</div></td></tr>
+<tr><td>iPhone 4S</td>			<td>Safari</td>				<td class="perfnotes">From home screen, using retina.</td>	<td class="perfscore"><div class="perfbar" style="width: 57%">34</div></td></td></tr>
+<tr><td>iPhone 4S</td>			<td>PhoneGap</td>			<td class="perfnotes">Using retina.</td>					<td class="perfscore"><div class="perfbar" style="width: 45%">27</div></td></tr>
+<tr><td>iPhone 4S</td>			<td>directCanvas</td>		<td class="perfnotes">Not using retina.</td>				<td class="perfscore"><div class="perfbar" style="width: 87%">52</div></td></tr>
+<tr><td>iPad 2</td>				<td>Safari</td>				<td class="perfnotes">From home screen.</td>				<td class="perfscore"><div class="perfbar" style="width: 70%">42</div></td></td></tr>
+<tr><td>iPad 2</td>				<td>PhoneGap</td>			<td></td>						<td class="perfscore perfright"><div class="perfbar" style="width: 23%"></div>&nbsp;14</td></tr>
+<tr><td>iPad 2</td>				<td>directCanvas</td>		<td></td>						<td class="perfscore"><div class="perfbar" style="width: 88%">53</div></td></tr>
+<tr><td>iPad 3</td>				<td>Safari</td>				<td class="perfnotes">From home screen, using retina.</td>	<td class="perfscore"><div class="perfbar" style="width: 50%">30</div></td></tr>
+<tr><td>iPad 3</td>				<td>PhoneGap</td>			<td class="perfnotes">Using retina.</td>					<td class="perfscore perfright"><div class="perfbar" style="width: 5%"></div>&nbsp;3</td></tr>
+<tr><td>iPad 3</td>				<td>directCanvas</td>		<td class="perfnotes">Not using retina.</td>				<td class="perfscore"><div class="perfbar" style="width: 90%">54</div></td></tr>
+<tr><td>Android 4</td>			<td>Stock browser</td>		<td class="perfnotes">Fail! Severe display glitches. Multi-touch only Android 4+.</td>	<td class="perfscore perfright"><div class="perfbar" style="width: 18%"></div>&nbsp;11</td></tr>
+<tr><td>Android 4</td>			<td>PhoneGap</td>			<td class="perfnotes">Fail! Severe display glitches. Multi-touch only Android 4+.</td>	<td class="perfscore perfright"><div class="perfbar" style="width: 17%"></div>&nbsp;10</td></tr>
+<tr><td>Android 4</td>			<td>Chrome 18 beta</td>		<td></td>						<td class="perfscore"><div class="perfbar" style="width: 40%">24</div></td></tr>
+<tr><td>Android 4</td>			<td>Firefox 14 beta</td>	<td></td>						<td class="perfscore perfright"><div class="perfbar" style="width: 12%"></div>&nbsp;7</td></tr>
+<tr><td>Android 4</td>			<td>Opera 12 mobile</td>	<td></td>						<td class="perfscore perfright"><div class="perfbar" style="width: 17%"></div>&nbsp;10</td></tr>
+<tr><td>Android 4</td>			<td>CocoonJS</td>			<td></td>						<td class="perfscore"><div class="perfbar" style="width: 57%">34</div></td></tr>
+<tr><td>Windows Phone 7</td>	<td>IE Mobile</td>			<td class="perfnotes">"Click" event only.</td>				<td class="perfscore perfright"><div class="perfbar" style="width: 23%"></div>&nbsp;14</td></tr>
+<tr><td>Windows Phone 7</td>	<td>PhoneGap</td>			<td class="perfnotes">Single-touch only.</td>				<td class="perfscore perfright"><div class="perfbar" style="width: 17%"></div>&nbsp;10</td></tr>
+<tr><td>Playbook</td>			<td>Browser</td>			<td class="perfnotes">Playbook OS 2.0</td>						<td class="perfscore perfright"><div class="perfbar" style="width: 15%"></div>&nbsp;9</td></tr>
+<tr><td>Playbook</td>			<td>Browser</td>			<td class="perfnotes">Playbook OS 2.1 (beta)</td>						<td class="perfscore"><div class="perfbar" style="width: 50%">30</div></td></tr>
+</table>
+
+</div>
+</body>
+</html>
