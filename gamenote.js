@@ -373,8 +373,8 @@ Quintus.GameNote = function(Q) {
                      [],
                      [],
                      [],
-                     ['action','b'],
-                     ['fire', 'a' ]]
+                     [],
+                     ['action', 'a' ]]
       });
     Q.touch(Q.SPRITE_UI,[1,0]);
     Q.input.drawButtons = Q.drawInputButtons;
