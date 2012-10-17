@@ -1,1 +1,1 @@
-{"ground":{"sx":0,"sy":0,"cols":3,"tilew":64,"tileh":64,"frames":3},"man":{"sx":0,"sy":64,"cols":15,"tilew":130,"tileh":252,"frames":18}}
+{"ground":{"sx":0,"sy":0,"cols":3,"tilew":64,"tileh":64,"frames":3},"controls":{"sx":0,"sy":64,"cols":4,"tilew":58,"tileh":64,"frames":4},"man":{"sx":0,"sy":128,"cols":15,"tilew":130,"tileh":252,"frames":18},"hydrant":{"sx":0,"sy":632,"cols":1,"tilew":82,"tileh":110,"frames":1},"cab":{"sx":0,"sy":742,"cols":1,"tilew":269,"tileh":158,"frames":1}}

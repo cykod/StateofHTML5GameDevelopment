@@ -18,6 +18,8 @@
 - Screen shot of FPS - with link to the top of the page
 
 
+- Two ways to look at it: As a Development Platform or as a Output Format
+
 
 - Intro / State of the art / show the Console Picture
 - Do a new picture for mobile

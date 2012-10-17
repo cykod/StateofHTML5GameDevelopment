@@ -1,7 +1,6 @@
 Quintus.Presentation = function(Q) {
-
 /*
- Q.slide(5,function(stage) {
+ Q.slide(20,function(stage) {
     stage.tiles("level0.json");
     stage.background("game-background.png");
 
@@ -16,36 +15,186 @@ Quintus.Presentation = function(Q) {
  });
  */
 
-  /*
-  Q.slide(4,function(stage) {
+ Q.slide(21,function(stage) {
+    stage.tiles("level0.json");
+    bg = stage.background("game-background.png");
+    bg.p.opacity = 0.5;
+
+    stage.title("Monetizing with Game Sponsors")
+    pt = stage.point("via Excellent PhotonStorm.com Article >")
+    pt.p.color = "#0000e1";
+
+    pt.on("touch",function() {
+      window.open("http://www.photonstorm.com/archives/3045/insert-coin-to-continue-the-html5-game-sponsorship-market");
+    });
+
+    var sponsor = stage.insert(new Q.Sprite({ asset: "html5sponsors.png", x: 200, y: 150, type: 0, pacity: 0 }));
+
+    sponsor.add("tween").animate({ opacity: 1.0 },1,null,{ delay: 2 });
+ });
+
+
+
+ Q.slide(20,function(stage) {
+    stage.tiles("level0.json");
+    bg = stage.background("moneybg.jpg");
+    bg.p.opacity = 0.5;
+
+    stage.points();
+    stage.title("You can certainly raise money...");
+    stage.point("Spaceport.io ($M, undisclosed)");
+    stage.point("Game Closure ($12M)");
+    stage.point("Goko ($8M)");
+    stage.point("TreSensa ($1M)");
+    stage.point("Artillery ($2.5M)");
+    stage.point("SpinPunch (YC)");
+    stage.point("But: Moblyng ($10M & bankrupt)")
+ });
+
+ Q.slide(19,function(stage) {
+    stage.tiles("level0.json");
+    bg = stage.background("moneybg.jpg");
+    bg.p.opacity = 0.5;
+
+    stage.title("What about the Benjamins?", { color: "#104910" } );
+    stage.point("Can you make money with HTML5 Games?", { color: "#104910" });
+ });
+
+ Q.slide(18,function(stage) {
     stage.tiles("level0.json");
     stage.background("game-background.png");
 
-    stage.title("Current State of the Art: HexGL");
+    stage.points();
+    stage.title("HTML5 as a\nDevelopment Language");
 
-    var iframe = new Q.UI.IFrame({ url: "http://www.youtube.com/embed/se-oorr2zM8", w: 640, h: 360, x: 192, y: -520 });
+    stage.point("Ejecta - Open-Source JavaScript,\n   Canvas, & Audio implementation in iOS\n   http://impactjs.com/ejecta");
+    stage.point("CocoonJS - Cloud based wrapper\n   Started targeting Android\n    (but iOS supported)\n   w/ a Cloud-based Builder");
+    stage.point("AppMobi - Cloud based, commercial builder\n    Free to use, but\n   Pay for cloud services");
+
+  });
+
+
+
+ Q.slide(17,function(stage) {
+    stage.tiles("level0.json");
+    stage.background("game-background.png");
+
+    stage.title("HTML5 as a Target Platform");
+
+
+    stage.scroller("construct2.png","Construct 2","- Commercial IDE\n- Free/$119/$399 Editions\n- Windows Only\n- Whole lot of Target Platforms\n  (iOS, Android, HTML5, Windows8)\n- \"No Programming Required\n- Lots of Docs, Tutorials, Community");
+    stage.scroller("gamemaker.png","GameMaker","- Commercial IDE\n- $99.99 + HTML5 Export ($99.99)\n- IDE Windows Only\n- Export to iOS, Android w/ $199/platform\n- Games");
+
+    stage.scroller("playcanvas.png","PlayCanvas","- Commercial IDE\n- Unreleased (but plenty of demos)\n- 3D Focused with 3D WebGL Engine");
+
+    stage.scroller("vaporware.png","And some more...","- The Artillery Platform (Unreleased)\n- Game Closure (Unreleased)\n- Spaceport NEO (Unreleased)\n- TreSensa (Available)\n- SpinPunch (Unreleased)\n- PlayCraft (Beta)");
+
+   stage.on("10%",function() {
+     stage.triggerScroller();
+   });
+  });
+
+
+
+  Q.slide(16,function(stage) {
+    stage.tiles("level0.json");
+    stage.background("game-background.png");
+
+    stage.title("HTML5 as a Web Platform");
+
+
+    stage.scroller("biolab.png","Impact.js","- Comercial Engine\n- $99/developer license\n- Class-based, event-based architecture\n- Good for 2D Games, Platformers\n- Included Level Editor\n- Well-documented, supported");
+    stage.scroller("limejs.png","LimeJS","- Open-source, Apache License\n- \"Native-experience games for all\n   modern touchscreens\"\n- Powerful, but not lightweight\n- Uses Google's closure compiler");
+    stage.scroller("easeljs.png","EaselJS","- Open-source, MIT License\n- Part of the CreateJS suite of tools\n- Touchscreen friendly, but not focused\n- Sponsored by Adobe and Microsoft\n- Lots of Examples, Good Docs\n- Used in Production (PvsD, Atari)");
+
+    stage.scroller("crafty.png","Crafty.js","- Open-source, MIT License\n- Lightweight, easy to get started\n- Component based architecture\n- Decent docs\n- Tutorials Lacking\n- Not that many production Games");
+
+    stage.scroller("threejs.jpg","Three.js","- Open-source, MIT License\n- The 3D Library for the Web\n- Recommend \"WebGL: Up and Running\"\n- Docs aren't great but lots of examples\n- Multiple Renderers, but WebGL\n   is where it's at");
+
+    stage.scroller("quintus.png","Quintus","- Open-source, MIT License\n- Built in my book\n- Class, Component & Event Based\n- Targeted at Mobile\n- Docs are a WIP\n- Not officially released\n   (html5quintus.com)");
+   // stage.scroller('biolab.png'
+
+   stage.on("10%",function() {
+     stage.triggerScroller();
+   });
+  });
+
+  Q.slide(15,function(stage) {
+    stage.tiles("level0.json");
+    stage.background("game-background.png");
+
+    stage.points();
+    stage.title("3 Approaches to\nHTML5 Game Development");
+
+    stage.point("1. Treat it as a Web Platform");
+    stage.point("   - Developing in JavaScript, deploy to Web");
+    stage.point("2. Treat it as a Target platform");
+    stage.point("   - Use a Game IDE or another language");
+    stage.point("3. Treat it as a Development Language");
+    stage.point("   - Developer in JS, deploy to Native");
+  });
+
+
+
+  Q.slide(14,function(stage) {
+    stage.tiles("level.json");
+    stage.background("game-background.png");
+
+    stage.title("Game-ception");
+
+    var iframe;
+    if(Q.touchDevice) {
+      iframe = new Q.UI.IFrame({ url: "http://playbiolab.com/", w: 640, h: 360, x: 192, y: -520 });
+    } else {
+      iframe = new Q.UI.IFrame({ url: "platformer/index.html", w: 640, h: 360, x: 192, y: -520 });
+    }
 
     iframe.add("tween").animate({ y: 120 },1,Q.Easing.Quadratic.Out, { delay: 0.5 });
 
     stage.insert(iframe);
 
-  }); */
+  });
 
-/*
-  Q.slide(9,function(stage) {
-    stage.tiles("level.json");
+
+ 
+  Q.slide(13,function(stage) {
+    stage.tiles("level0.json");
+    stage.background("html5logo.jpg");
+
+    stage.points();
+
+    stage.title("HTML5's Super Powers", { color: "white" });
+    var pt1 = stage.point("1. Write Once,\n   Deploy Anywhere*").set({ x: 20 });
+    var pt2 = stage.point("2. Share instantly\n  using just a link").set({ x: 20 });
+    var pt3 = stage.point("3. An open platform\n   matched with\n   W3C Specifications").set({ x: 20 });
+    stage.point("4. A \"View Source\"\n  Community" ).set({ x: 710, y: pt1.p.y });
+    stage.point("5. Everyone already\n  has an IDE" ).set({ x: 710, y: pt2.p.y });
+    stage.point("6. First Class\n  Web Citizen").set({ x: 710, y: pt3.p.y });
+
+
+    stage.titlePoint.animate({ opacity: 1 });
+   stage.container.stop();
+    stage.isVisible=true;
+  });
+
+  Q.slide(12,function(stage) {
+    stage.tiles("level_big_gap.json");
     stage.background("game-background.png");
 
-    stage.title("Gameception");
+    stage.title("Hold it one second...");
+    stage.point("Why Bother with HTML5 Game Development?");
+    var pt = stage.point("(Hint: Super Powers)").stop();
 
-    var iframe = new Q.UI.IFrame({ url: "platformer/index.html", w: 670, h: 330, x: 172, y: -520, background: "white" });
+    stage.on("10%",function() {
+      pt.animate({ opacity: 1 });
+    });
 
-    iframe.add("tween").animate({ y: 160 },1,Q.Easing.Quadratic.Out, { delay: 0.5 });
+    Q("Presenter").p({ skipMove: true, x: 100 });
 
-    stage.insert(iframe);
+    stage.on("30%",function() {
+      Q("Presenter").first().add("tween").set({ angle: 0, standing: -0.5 }).animate({ angle: 45, y: -500, x: 1500},1.5,null).del("2d");
+    });
   }); 
-
-  */
 
   Q.slide(11,function(stage) {
     stage.tiles("level0.json");
@@ -64,7 +213,6 @@ Quintus.Presentation = function(Q) {
     stage.insert(html);
 
   });
-
 
  
   Q.slide(10,function(stage) {
@@ -220,7 +368,10 @@ Quintus.Presentation = function(Q) {
   Q.preload([
     'sprites.png','sprites.json','game-background.png', 'sign.png', 'history.png',
     'level.json', 'level2.json', 'level0.json', 'zuckerberg.jpg', 'level_gap.json',
-    'hype_cycle.png', 'game-background2.png', 'windows8-background.png'
+    'hype_cycle.png', 'game-background2.png', 'windows8-background.png', 'level_big_gap.json',
+    'html5logo.jpg', 'biolab.png', 'limejs.png', 'easeljs.png', 'crafty.png', 'threejs.jpg',
+    "quintus.png", "construct2.png", "gamemaker.png", "playcanvas.png", "vaporware.png",
+    "moneybg.jpg", "html5sponsors.png" 
   ]);
 
   // Called after preload

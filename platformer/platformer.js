@@ -15,7 +15,7 @@ window.addEventListener("load",function() {
 var Q = window.Q = Quintus()
         .include("Sprites, Scenes, Input, 2D")
         // Maximize this game to whatever the size of the browser is
-        .setup({ maximize: true })
+        .setup({ width: 630, height: 350})
         // And turn on default input controls
         .controls();
 

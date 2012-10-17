@@ -6,12 +6,13 @@ Quintus.GameNote = function(Q) {
       this.collisionLayer(new Q.TileLayer({
         dataAsset: tileAsset,
         z: 1,
-        sheet: "ground", tileW: 64, tileH: 64
+        sheet: "ground", tileW: 64, tileH: 64,
+        y: -10
       }));
     },
 
     background: function(imageAsset) {
-      this.insert(new Q.Sprite({ asset: imageAsset, type: 0, y: 0, z: 0 }));
+      return this.insert(new Q.Sprite({ asset: imageAsset, type: 0, y: 0, z: 0 }));
     },
 
 
@@ -46,7 +47,8 @@ Quintus.GameNote = function(Q) {
         size: 48,
         w: 640,
         align: "center",
-        opacity: 0
+        opacity: 0,
+        z: 2
       }).add("tween");
 
       this.titlePoint = this.insert(pt);
@@ -76,7 +78,8 @@ Quintus.GameNote = function(Q) {
         label: text,
         size: 32,
         maxWidth: 500,
-        opacity: 0
+        opacity: 0,
+        z: 2
       }).add("tween");
 
       this.nextPoint += pt.p.h + 20;
@@ -113,7 +116,44 @@ Quintus.GameNote = function(Q) {
       });
 
      return this.insert(pt);
-    }
+   },
+
+   scroller: function(asset,titleText,labelText) {
+     this.scrollers = this.scrollers || [];
+
+     this.activeScroller =  this.activeScroller == void 0 ? -1 : this.activeScroller;
+
+     var image = this.insert(new Q.Sprite({ asset: asset, x: 150, y: 180, type: 1, opacity: 0, z:1 }).add("tween"));
+     var title = this.insert(new Q.UI.Text({ label: titleText, size: 50, color: "#333", x: 750, y: 180, align:'center', w: 400, opacity: 0, z:2  }).add("tween"));
+     var label = this.insert(new Q.UI.Text({ label: labelText, size: 24, color: "black", x: 490, y: 260, opacity: 0, z:2 }).add("tween"));
+
+     this.scrollers.push([ image, title, label ]);
+
+     var stage = this;
+     image.on("scroller",function() {
+       stage.triggerScroller();
+     });
+
+   },
+
+   triggerScroller: function() {
+
+     var scrl = this.scrollers[this.activeScroller];
+
+     if(this.activeScroller != -1) {
+     scrl[0].stop().animate({ x: -500, opacity: 0 },1,Q.Easing.Quadratic.Out);
+     scrl[1].stop().animate({ x: 1500, opacity: 0 },1,Q.Easing.Quadratic.Out)
+     scrl[2].stop().animate({ x: 1500, opacity: 0 },1,Q.Easing.Quadratic.Out);
+
+     }
+     
+     this.activeScroller = (this.activeScroller+1) % this.scrollers.length;
+     scrl = this.scrollers[this.activeScroller];
+
+     scrl[0].set({ x: -500, opacity: 0 }).animate({ x: 150, opacity: 1 },1,Q.Easing.Quadratic.Out, { delay: 0.5 });
+     scrl[1].set({ x: 1500, opacity: 0 }).animate({ x: 750, opacity: 1 },1,Q.Easing.Quadratic.Out, { delay: 0.5 })
+     scrl[2].set({ x: 1500, opacity: 0 }).animate({ x: 490, opacity: 1 },1,Q.Easing.Quadratic.Out, { delay: 0.5 });
+   }
 
   });
 
@@ -179,7 +219,9 @@ Quintus.GameNote = function(Q) {
         Q.clearStage(oldStageNumber);
         Q.inTransition = false;
       }});
-      Q(".platformerControls",Q.activeSlideStage).p({ x: 1024 - 100 });
+      if(!Q(".platformerControls",Q.activeSlideStage).first().p.skipMove) {
+        Q(".platformerControls",Q.activeSlideStage).p({ x: 1024 - 100 });
+      }
     }
   };
 
@@ -206,7 +248,12 @@ Quintus.GameNote = function(Q) {
       this.triggered = {};
       this.triggeredPercentage = {};
 
+      this.on("hit.sprite",this,"hitSprite");
       this.add("2d, platformerControls, animation");
+    },
+
+    hitSprite: function(col) {
+      col.obj.trigger("scroller");
     },
 
     step: function(dt) {
@@ -273,6 +320,41 @@ Quintus.GameNote = function(Q) {
 
   });
 
+  Q.controlAssets = {
+    "left": 0,
+    "right": 1,
+    "action": 2,
+    "fire": 3
+  };
+
+  Q.drawInputButtons = function() {
+      var keypad = Q.input.keypad,
+          ctx = Q.ctx;
+
+      ctx.save();
+      ctx.textAlign = "center"; 
+      ctx.textBaseline = "middle";
+
+      var sheet = Q.sheet("controls");
+
+      for(var i=0;i<keypad.controls.length;i++) {
+        var control = keypad.controls[i];
+
+        if(control[0]) {
+          var x = i * keypad.unit + keypad.gutter,
+              y = keypad.bottom - 70;
+              key = Q.inputs[control[0]];
+
+          ctx.globalAlpha = key ? 0.5 : 1.0;
+          sheet.draw(ctx,x,y,Q.controlAssets[control[0]])
+
+        }
+      }
+
+      ctx.restore();
+  };
+
+
   Q.start = function() {
     Q.input.keyboardControls();
     Q.input.touchControls({
@@ -281,10 +363,14 @@ Quintus.GameNote = function(Q) {
                      [],
                      [],
                      [],
+                     [],
+                     [],
+                     [],
                      ['action','b'],
                      ['fire', 'a' ]]
       });
-  //  Q.touch(Q.SPRITE_UI,1);
+    Q.touch(Q.SPRITE_UI,[1,0]);
+    Q.input.drawButtons = Q.drawInputButtons;
 
     Q.preload(function() {
       Q.presentationSetup();
