@@ -22,13 +22,13 @@ Quintus.Presentation = function(Q) {
 
     stage.title("Monetizing with Game Sponsors")
     pt = stage.point("via Excellent PhotonStorm.com Article >")
-    pt.p.color = "#0000e1";
+    pt.p.color = "#0000e1"; 
 
     pt.on("touch",function() {
       window.open("http://www.photonstorm.com/archives/3045/insert-coin-to-continue-the-html5-game-sponsorship-market");
     });
 
-    var sponsor = stage.insert(new Q.Sprite({ asset: "html5sponsors.png", x: 200, y: 150, type: 0, pacity: 0 }));
+    var sponsor = stage.insert(new Q.Sprite({ asset: "html5sponsors.png", x: 200, y: 150, type: 0, opacity: 0 }));
 
     sponsor.add("tween").animate({ opacity: 1.0 },1,null,{ delay: 2 });
  });
