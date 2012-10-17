@@ -24,9 +24,26 @@ body { max-width:1024px; margin:0 auto; }
  canvas {
    z-index:0;
  }
+
+#attribution { 
+  position:absolute; bottom:0px;
+  right:0px;
+  font-family:proxima-nova;
+  opacity:0.5;
+  color:#666;
+}
+
+#attribution a {
+  color:#666;
+  text-decoration:none;
+}
 </style>
 </head>
 <body>
+<div id='attribution'>
+  Copyright &copy;2012 <a href='http://cykod.com'>Cykod LLC.</a> &amp; <a href='http://www.html5gamedevelopment.org'>HTML5GameDevelopment.org</a> | <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png" /></a>
+
+</div>
 <!---
 <div pub-key="pub-13814550-e608-4a18-a6c1-918a7629c300" sub-key="sub-9ea75ce6-2d3d-11e0-a6b8-0de526750bdd" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
 <script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
@@ -66,5 +83,6 @@ body { max-width:1024px; margin:0 auto; }
  
 })();</script>
 -->
+
 </body>
 </html>
