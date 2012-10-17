@@ -218,7 +218,7 @@ Q.slide(22,function(stage) {
 
     var iframe;
     if(Q.touchDevice) {
-      iframe = new Q.UI.IFrame({ url: "http://playbiolab.com/", w: 640, h: 360, x: 192, y: -520 });
+      iframe = new Q.UI.IFrame({ url: "http://playbiolab.com/", w: 480, h: 320, x: 272, y: -520 });
     } else {
       iframe = new Q.UI.IFrame({ url: "platformer/index.html", w: 640, h: 360, x: 192, y: -520 });
     }
