@@ -330,8 +330,7 @@ Quintus.GameNote = function(Q) {
   Q.controlAssets = {
     "left": 0,
     "right": 1,
-    "action": 2,
-    "fire": 3
+    "action": 3
   };
 
   Q.drawInputButtons = function() {
