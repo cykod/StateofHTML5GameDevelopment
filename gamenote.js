@@ -45,6 +45,7 @@ Quintus.GameNote = function(Q) {
         y: this.nextPoint,
         label: text.toUpperCase(),
         size: 70,
+        lineHeight: 1,
         w: 640,
         align: "center",
         family: "atrament-web",
@@ -81,7 +82,8 @@ Quintus.GameNote = function(Q) {
         size: 28,
         maxWidth: 500,
         opacity: 0,
-		weight:400,
+        lineHeight: 1,
+        weight:400,
         family: "proxima-nova",
         color: "#333",
         z: 2

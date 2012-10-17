@@ -1,7 +1,7 @@
 Quintus.Presentation = function(Q) {
  Q.slide(27,function(stage) {
     stage.tiles("level0.json");
-    stage.background("game-background.png");
+    stage.background("background5.png");
 
     stage.nextPoint = 150;
     stage.title("Thanks!").stop().set({opacity: 1});
@@ -16,13 +16,13 @@ Quintus.Presentation = function(Q) {
 
 Q.slide(26,function(stage) {
   stage.tiles("level0.json");
-  bg = stage.background("game-background.png").set({opacity: 1 });
+  bg = stage.background("background5.png").set({opacity: 1 });
 
   var title =stage.title("So...I wrote a book");
 
   stage.point("...And I'm giving a few away");
 
-  var book = stage.insert(new Q.Sprite({ asset: "book.jpg", x: 290, y: 150, type: 0, opacity: 0 }));
+  var book = stage.insert(new Q.Sprite({ asset: "book.jpg", x: 290, y: 160, type: 0, opacity: 0 }));
 
   bg.add("tween").animate({ opacity: 0.1 },1,null, { delay: 2 });
 
@@ -35,7 +35,7 @@ Q.slide(26,function(stage) {
 
 Q.slide(25,function(stage) {
   stage.tiles("level0.json");
-  bg = stage.background("game-background.png");
+  bg = stage.background("background5.png");
 
   stage.points();
   stage.title("Google doesn't\nf*&^%%$# care");
@@ -51,7 +51,7 @@ Q.slide(25,function(stage) {
 
 Q.slide(24,function(stage) {
   stage.tiles("level0.json");
-  bg = stage.background("game-background.png");
+  bg = stage.background("background5.png");
 
   stage.points();
   stage.title("Technical Limitations:\nKnow 'em");
@@ -68,7 +68,7 @@ Q.slide(24,function(stage) {
 
 Q.slide(23,function(stage) {
   stage.tiles("level0.json");
-  bg = stage.background("game-background.png");
+  bg = stage.background("background4.png");
 
   stage.points();
   stage.title("Client Work");
@@ -83,17 +83,15 @@ Q.slide(23,function(stage) {
 
 Q.slide(22,function(stage) {
   stage.tiles("level0.json");
-  bg = stage.background("game-background.png");
+  bg = stage.background("background3.png");
 
-  stage.points();
   stage.title("Mobile HTML5 Games:\nLessons Learned");
-  stage.point("1. Client Lessons")
-  stage.point("2. Technical Lessons")
+  stage.point("Client Lessons & Technical Lessons")
 });
 
  Q.slide(21,function(stage) {
     stage.tiles("level0.json");
-    bg = stage.background("game-background.png");
+    bg = stage.background("background2.png");
     bg.p.opacity = 0.5;
 
     stage.title("Monetizing with Game Sponsors")
@@ -104,7 +102,7 @@ Q.slide(22,function(stage) {
       window.open("http://www.photonstorm.com/archives/3045/insert-coin-to-continue-the-html5-game-sponsorship-market");
     });
 
-    var sponsor = stage.insert(new Q.Sprite({ asset: "html5sponsors.png", x: 200, y: 150, type: 0, opacity: 0 }));
+    var sponsor = stage.insert(new Q.Sprite({ asset: "html5sponsors.png", x: 0, y: 50, type: 0, opacity: 0 }));
 
     sponsor.add("tween").animate({ opacity: 1.0 },1,null,{ delay: 2 });
  });
@@ -117,7 +115,7 @@ Q.slide(22,function(stage) {
     bg.p.opacity = 0.5;
 
     stage.points();
-    stage.title("You can certainly raise money...");
+    stage.title("You can certainly\nraise money...");
     stage.point("Spaceport.io ($M, undisclosed)");
     stage.point("Game Closure ($12M)");
     stage.point("Goko ($8M)");
@@ -132,20 +130,20 @@ Q.slide(22,function(stage) {
     bg = stage.background("moneybg.jpg");
     bg.p.opacity = 0.5;
 
-    stage.title("What about the Benjamins?", { color: "#104910" } );
-    stage.point("Can you make money with HTML5 Games?", { color: "#104910" });
+    stage.title("What about the Washingtons?", { color: "#104910", y: 220 } );
+    stage.point("Can you make money with HTML5 Games?", { color: "#333", y: 300 });
  });
 
  Q.slide(18,function(stage) {
     stage.tiles("level0.json");
-    stage.background("game-background.png");
+    stage.background("background4.png");
 
     stage.points();
-    stage.title("HTML5 as a\nDevelopment Language");
+    stage.title("HTML5 as Language");
 
-    stage.point("Ejecta - Open-Source JavaScript,\n   Canvas, & Audio implementation in iOS\n   http://impactjs.com/ejecta");
-    stage.point("CocoonJS - Cloud based wrapper\n   Started targeting Android\n    (but iOS supported)\n   w/ a Cloud-based Builder");
-    stage.point("AppMobi - Cloud based, commercial builder\n    Free to use, but\n   Pay for cloud services");
+    stage.point("Ejecta - Open-Source JavaScript,\nCanvas, & Audio implementation in iOS\nhttp://impactjs.com/ejecta");
+    stage.point("CocoonJS - Cloud based wrapper\nStarted targeting Android (but iOS supported)\nw/ a Cloud-based Builder");
+    stage.point("AppMobi - Cloud based, commercial builder\nFree to use, but pay for cloud services");
 
   });
 
@@ -153,7 +151,7 @@ Q.slide(22,function(stage) {
 
  Q.slide(17,function(stage) {
     stage.tiles("level0.json");
-    stage.background("game-background.png");
+    stage.background("background3.png");
 
     stage.title("HTML5 as a Target Platform");
 
@@ -174,7 +172,7 @@ Q.slide(22,function(stage) {
 
   Q.slide(16,function(stage) {
     stage.tiles("level0.json");
-    stage.background("game-background.png");
+    stage.background("background4.png");
 
     stage.title("HTML5 as a Web Platform");
 
@@ -197,7 +195,7 @@ Q.slide(22,function(stage) {
 
   Q.slide(15,function(stage) {
     stage.tiles("level0.json");
-    stage.background("game-background.png");
+    stage.background("background3.png");
 
     stage.points();
     stage.title("3 Approaches to\nHTML5 Game Development");
@@ -214,7 +212,7 @@ Q.slide(22,function(stage) {
 
   Q.slide(14,function(stage) {
     stage.tiles("level.json");
-    stage.background("game-background.png");
+    stage.background("background4.png");
 
     stage.title("Game-ception");
 
@@ -235,17 +233,17 @@ Q.slide(22,function(stage) {
  
   Q.slide(13,function(stage) {
     stage.tiles("level0.json");
-    stage.background("html5logo.jpg");
+    stage.background("html5logo.png");
 
     stage.points();
 
-    stage.title("HTML5's Super Powers", { color: "white" });
-    var pt1 = stage.point("1. Write Once,\n   Deploy Anywhere*").set({ x: 20 });
-    var pt2 = stage.point("2. Share instantly\n  using just a link").set({ x: 20 });
-    var pt3 = stage.point("3. An open platform\n   matched with\n   W3C Specifications").set({ x: 20 });
-    stage.point("4. A \"View Source\"\n  Community" ).set({ x: 710, y: pt1.p.y });
-    stage.point("5. Everyone already\n  has an IDE" ).set({ x: 710, y: pt2.p.y });
-    stage.point("6. First Class\n  Web Citizen").set({ x: 710, y: pt3.p.y });
+    stage.title("HTML5's Super Powers", { color: "white" }).set({ y: 50 });
+    var pt1 = stage.point("1. Write Once,\n   Deploy Anywhere*").set({ x: 40, color: "white" });
+    var pt2 = stage.point("2. Share instantly\n  using just a link").set({ x: 40, color: "white" });
+    var pt3 = stage.point("3. An open platform\n   matched with\n   W3C Specifications").set({ x: 40, color: "white" });
+    stage.point("4. A \"View Source\"\n  Community" ).set({ x: 770, y: pt1.p.y, color: "white" });
+    stage.point("5. Everyone already\n  has an IDE" ).set({ x: 760, y: pt2.p.y, color: "white" });
+    stage.point("6. First Class\n  Web Citizen").set({ x: 750, y: pt3.p.y, color: "white" });
 
 
     stage.titlePoint.animate({ opacity: 1 });
@@ -255,13 +253,13 @@ Q.slide(22,function(stage) {
 
   Q.slide(12,function(stage) {
     stage.tiles("level_big_gap.json");
-    stage.background("game-background.png");
+    stage.background("background2.png");
 
     stage.title("Hold it one second...");
     stage.point("Why Bother with HTML5 Game Development?");
     var pt = stage.point("(Hint: Super Powers)").stop();
 
-    stage.on("10%",function() {
+    stage.on("20%",function() {
       pt.animate({ opacity: 1 });
     });
 
@@ -274,13 +272,13 @@ Q.slide(22,function(stage) {
 
   Q.slide(11,function(stage) {
     stage.tiles("level0.json");
-    stage.background("game-background.png");
+    stage.background("background3.png");
 
     stage.title("Current State of the Art: HexGL");
 
-    var iframe = new Q.UI.IFrame({ url: "http://www.youtube.com/embed/se-oorr2zM8", w: 640, h: 360, x: 192, y: -520 });
+    var iframe = new Q.UI.IFrame({ url: "http://www.youtube.com/embed/se-oorr2zM8", w: 640, h: 360, x: 192, y: -520, type:0 });
 
-    iframe.add("tween").animate({ y: 100 },1,Q.Easing.Quadratic.Out, { delay: 0.5 });
+    iframe.add("tween").animate({ y: 130 },1,Q.Easing.Quadratic.Out, { delay: 0.5 });
 
     stage.insert(iframe);
 
@@ -297,8 +295,6 @@ Q.slide(22,function(stage) {
 
     stage.points();
 
-
-
     stage.title("Don't Forget Windows 8", { color: "white" });
     stage.point("1. In Windows 8, HTML5 is a\n   first-class development platform.", { color: "white" });
     stage.point("2. HTML5 tablet performance\n   is excellent.", { color: "white" });
@@ -313,13 +309,14 @@ Q.slide(22,function(stage) {
 
  Q.slide(9,function(stage) {
     stage.tiles("level0.json");
-    stage.background("game-background.png");
+    var bg = stage.background("background3.png");
+    bg.p.opacity = 0.6;
 
     stage.title("Scirra's Great HTML5\nGaming Performance Comparision");
 
     var iframe = new Q.UI.IFrame({ url: "scirra.html", w: 680, h: 330, x: 172, y: -520, background: "rgba(255,255,255,0.3)", type: 0 });
 
-    iframe.add("tween").animate({ y: 160 },1,Q.Easing.Quadratic.Out, { delay: 0.5 });
+    iframe.add("tween").animate({ y: 200 },1,Q.Easing.Quadratic.Out, { delay: 0.5 });
 
     stage.insert(iframe);
   }); 
@@ -328,20 +325,20 @@ Q.slide(22,function(stage) {
 
   Q.slide(8,function(stage) {
     stage.tiles("level0.json");
-    stage.background("game-background.png");
+    stage.background("background2.png");
 
     stage.points();
     stage.title("On Mobile...");
     stage.point("1. Canvas performance is solid (iOS5+, ICS+)");
-    stage.point("2. No WebGL, but OpenGL ES-based\n native wrappers");
+    stage.point("2. No WebGL, but OpenGL ES-based\n    native wrappers");
     stage.point("3. Web Audio API in iOS6");
     stage.point("4. Multi-touch now in Android 4+");
-    stage.point("5. Remote Debugging,\n  iOS 6+, Chrome ICS+");
+    stage.point("5. Remote Debugging,\n    iOS 6+, Chrome ICS+");
   });
 
   Q.slide(7,function(stage) {
     stage.tiles("level0.json");
-    stage.background("game-background.png");
+    stage.background("background3.png");
 
     stage.points();
     stage.title("On Desktop...");
@@ -354,7 +351,8 @@ Q.slide(22,function(stage) {
 
   Q.slide(6,function(stage) {
     stage.tiles("level_gap.json");
-    stage.background("game-background2.png");
+    var bg = stage.background("background2.png");
+    bg.p.opacity = 0.5;
 
     var hype = stage.insert(new Q.Sprite({ asset: "hype_cycle.png", x: 250, y: 160, type: 0, opacity: 0, z: 20 }).add("tween"));
     stage.title("But there's hope...");
@@ -374,9 +372,9 @@ Q.slide(22,function(stage) {
     stage.title("Basically...");
 
     var pt = stage.title("We all got a little Zucked");
-    pt.p.y = 400;
+    pt.p.y = 390;
 
-    var zuk = stage.insert(new Q.Sprite({ asset: "zuckerberg.jpg", x: 300, y: 120, type: 0, opacity: 0.01 }).add("tween"));
+    var zuk = stage.insert(new Q.Sprite({ asset: "zuckerberg.jpg", x: 300, y: 140, type: 0, opacity: 0.01 }).add("tween"));
     stage.on("30%",function() {
       zuk.animate({ opacity: 1 }, null,null);
       pt .animate({ opacity: 1 }, null,null);
@@ -387,15 +385,15 @@ Q.slide(22,function(stage) {
 
   Q.slide(4,function(stage) {
     stage.tiles("level0.json");
-    stage.background("game-background.png");
+    stage.background("background2.png");
 
     stage.points();
-    stage.title("THE HTML5 MOBILE \"ILLUSION\"");
-    stage.point("1 Crappy Canvas Performance");
-    stage.point("2 No WebGL");
-    stage.point("3 No multi-touch on Android");
-    stage.point("4 Sound support so bad it hurt.");
-    stage.point("5 Limited & Terrible Debugging tools.");
+    stage.title("THE HTML5\n MOBILE \"ILLUSION\"");
+    stage.point("1. Crappy Canvas Performance");
+    stage.point("2. No WebGL");
+    stage.point("3. No multi-touch on Android");
+    stage.point("4. Sound support so bad it hurt.");
+    stage.point("5. Limited & Terrible Debugging tools.");
   });
 
 
@@ -407,21 +405,44 @@ Q.slide(22,function(stage) {
     stage.background("game-background.png");
 
     stage.points();
-    stage.title("WHY THE DELAY?");
-    stage.point("1 Desktop performance and stability took\n    longer than expected.");
-    stage.point("2 Flash and Unity were better at both.");
-    stage.point("3 HTML5 on Mobile just wasn't there.");
-    stage.point("4 Mediocre performance +\n    High resolutions\n    = Disaster");
+    stage.title("Why the delay?");
+    stage.point("1. Desktop performance and stability took\n    longer than expected.");
+    stage.point("2. Flash and Unity were better at both.");
+    stage.point("3. HTML5 on Mobile just wasn't there.");
+    stage.point("4. Mediocre performance +\n    High resolutions\n    = Disaster");
   });
 
   Q.slide(2,function(stage) {
     stage.tiles("level0.json");
-    stage.background("game-background.png");
+    stage.background("background2.png");
 
-    var history = stage.insert(new Q.Sprite({ asset: "history.png", x:0, y: -512, type: 0 }).add("tween"));
+    var history = stage.insert(new Q.Sprite({ asset: "history.png", x:0, y: -512, type: 0, z:3 }).add("tween"));
     
     history.animate({ y: 100 }, 1, Q.Easing.Quadratic.Out)
 
+
+    var sp = stage.insert(new Q.Sprite({x : 0, y: 225, z:2, opacity: 0, time: 0 })).add("tween");
+    sp.draw = function(ctx) {
+      ctx.save();
+      ctx.globalAlpha = this.p.opacity;
+      ctx.fillStyle = "#ffff0d";
+      ctx.beginPath();
+      ctx.moveTo(this.p.x - 25,0);
+      ctx.lineTo(this.p.x + 25,0);
+      ctx.lineTo(this.p.x + 5,650);
+      ctx.lineTo(this.p.x - 5,650);
+    //  ctx.arc(this.p.x,this.p.y,this.p.size,0,Math.PI * 2,true);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    sp.animate({ opacity: 0.5}, 1, Q.Easing.Quadratic.Out, { delay: 1 })
+
+    sp.on("step",function(dt) {
+      sp.p.time += dt;
+      sp.p.size = 20 + 5*Math.cos(this.p.time*5);
+      sp.p.x = stage.presenter.p.x + stage.presenter.p.w/2;
+    });
     
   });
 
@@ -431,12 +452,13 @@ Q.slide(22,function(stage) {
 
     var sign = stage.insert(new Q.Sprite({ asset: "sign.png", x: 512 - 388/2, y: -512, type: 0 }).add("tween"));
 
-    sign.animate({ y: 0 }, 2, Q.Easing.Quadratic.Out, { delay: 0.5 })
+    sign.animate({ y: 0 }, 2, Q.Easing.Quadratic.Out, { delay: 0.5, z: 3 })
 
     stage.presenter.add("tween");
 
     stage.presenter.p.y = -1024;
     stage.presenter.animate({ y: -512, vy: 0 },2); 
+
 
   });
 
@@ -444,10 +466,11 @@ Q.slide(22,function(stage) {
   Q.preload([
     'sprites.png','sprites.json','game-background.png', 'sign.png', 'history.png',
     'level.json', 'level2.json', 'level0.json', 'zuckerberg.jpg', 'level_gap.json',
-    'hype_cycle.png', 'game-background2.png', 'windows8-background.png', 'level_big_gap.json',
-    'html5logo.jpg', 'biolab.png', 'limejs.png', 'easeljs.png', 'crafty.png', 'threejs.jpg',
+    'hype_cycle.png',  'windows8-background.png', 'level_big_gap.json',
+    'html5logo.png', 'biolab.png', 'limejs.png', 'easeljs.png', 'crafty.png', 'threejs.jpg',
     "quintus.png", "construct2.png", "gamemaker.png", "playcanvas.png", "vaporware.png",
-    "moneybg.jpg", "html5sponsors.png", "book.jpg"
+    "moneybg.jpg", "html5sponsors.png", "book.jpg", "background2.png", "background3.png",
+    "background4.png","background5.png"
   ]);
 
   // Called after preload
