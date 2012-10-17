@@ -43,12 +43,12 @@ Quintus.GameNote = function(Q) {
       var pt = new Q.UI.Text(p,{ 
         x: 512,
         y: this.nextPoint,
-        label: text,
-        size: 48,
+        label: text.toUpperCase(),
+        size: 70,
         w: 640,
         align: "center",
-        family: 'jubilat',
-        color: "#490000",
+        family: "atrament-web",
+        color: "#C0322D",
         opacity: 0,
         z: 2
       }).add("tween");
@@ -78,10 +78,11 @@ Quintus.GameNote = function(Q) {
         x: 200,
         y: this.nextPoint,
         label: text,
-        size: 32,
+        size: 28,
         maxWidth: 500,
         opacity: 0,
-        family: 'jubilat',
+		weight:400,
+        family: "proxima-nova",
         color: "#333",
         z: 2
       }).add("tween");
@@ -128,8 +129,8 @@ Quintus.GameNote = function(Q) {
      this.activeScroller =  this.activeScroller == void 0 ? -1 : this.activeScroller;
 
      var image = this.insert(new Q.Sprite({ asset: asset, x: 150, y: 180, type: 1, opacity: 0, z:1 }).add("tween"));
-     var title = this.insert(new Q.UI.Text({ label: titleText, size: 50, color: "#333", x: 750, y: 180, align:'center', w: 400, opacity: 0, z:2  }).add("tween"));
-     var label = this.insert(new Q.UI.Text({ label: labelText, size: 24, color: "black", x: 490, y: 260, opacity: 0, z:2 }).add("tween"));
+     var title = this.insert(new Q.UI.Text({ label: titleText.toUpperCase(), size: 50, family: "atrament-web", color: "#C0322D", x: 490, y: 180, align:'left', opacity: 0, z:2  }).add("tween"));
+     var label = this.insert(new Q.UI.Text({ label: labelText, size: 24, family: "proxima-nova", weight:400, color: "black", x: 490, y: 240, opacity: 0, z:2 }).add("tween"));
 
      this.scrollers.push([ image, title, label ]);
 
@@ -155,7 +156,7 @@ Quintus.GameNote = function(Q) {
      scrl = this.scrollers[this.activeScroller];
 
      scrl[0].set({ x: -500, opacity: 0 }).animate({ x: 150, opacity: 1 },1,Q.Easing.Quadratic.Out, { delay: 0.5 });
-     scrl[1].set({ x: 1500, opacity: 0 }).animate({ x: 750, opacity: 1 },1,Q.Easing.Quadratic.Out, { delay: 0.5 })
+     scrl[1].set({ x: 1500, opacity: 0 }).animate({ x: 490, opacity: 1 },1,Q.Easing.Quadratic.Out, { delay: 0.5 })
      scrl[2].set({ x: 1500, opacity: 0 }).animate({ x: 490, opacity: 1 },1,Q.Easing.Quadratic.Out, { delay: 0.5 });
    }
 

@@ -390,12 +390,12 @@ Q.slide(22,function(stage) {
     stage.background("game-background.png");
 
     stage.points();
-    stage.title("The HTML5 Mobile \"Illusion\"");
-    stage.point("1. Crappy Canvas Performance");
-    stage.point("2. No WebGL");
-    stage.point("3. No multi-touch on Android");
-    stage.point("4. Sound support so bad it hurt.");
-    stage.point("5. Limited & Terrible Debugging tools.");
+    stage.title("THE HTML5 MOBILE \"ILLUSION\"");
+    stage.point("1 Crappy Canvas Performance");
+    stage.point("2 No WebGL");
+    stage.point("3 No multi-touch on Android");
+    stage.point("4 Sound support so bad it hurt.");
+    stage.point("5 Limited & Terrible Debugging tools.");
   });
 
 
@@ -407,11 +407,11 @@ Q.slide(22,function(stage) {
     stage.background("game-background.png");
 
     stage.points();
-    stage.title("Why the Delay?");
-    stage.point("1. Desktop performance and stability took\n    longer than expected.");
-    stage.point("2. Flash and Unity were better at both.");
-    stage.point("3. HTML5 on Mobile just wasn't there.");
-    stage.point("4. Mediocre performance +\n    High resolutions\n    = Disaster");
+    stage.title("WHY THE DELAY?");
+    stage.point("1 Desktop performance and stability took\n    longer than expected.");
+    stage.point("2 Flash and Unity were better at both.");
+    stage.point("3 HTML5 on Mobile just wasn't there.");
+    stage.point("4 Mediocre performance +\n    High resolutions\n    = Disaster");
   });
 
   Q.slide(2,function(stage) {
