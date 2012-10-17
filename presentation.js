@@ -410,6 +410,7 @@ Q.slide(22,function(stage) {
     stage.point("2. Flash and Unity were better at both.");
     stage.point("3. HTML5 on Mobile just wasn't there.");
     stage.point("4. Mediocre performance +\n    High resolutions\n    = Disaster");
+
   });
 
   Q.slide(2,function(stage) {
@@ -459,6 +460,11 @@ Q.slide(22,function(stage) {
     stage.presenter.p.y = -1024;
     stage.presenter.animate({ y: -512, vy: 0 },2); 
 
+    stage.insert(new Q.Sprite({ sheet: "cab", x: 500, y: 700 - 158, type: 0, z: 11 }));
+    stage.insert(new Q.Sprite({ sheet: "hydrant", x: 100, y: 700 - 110, type: 0, z: 11 }));
+
+ 
+    
 
   });
 
