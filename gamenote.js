@@ -47,6 +47,8 @@ Quintus.GameNote = function(Q) {
         size: 48,
         w: 640,
         align: "center",
+        family: 'jubilat',
+        color: "#490000",
         opacity: 0,
         z: 2
       }).add("tween");
@@ -79,6 +81,8 @@ Quintus.GameNote = function(Q) {
         size: 32,
         maxWidth: 500,
         opacity: 0,
+        family: 'jubilat',
+        color: "#333",
         z: 2
       }).add("tween");
 

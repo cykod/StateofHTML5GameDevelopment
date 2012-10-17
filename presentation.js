@@ -1,6 +1,5 @@
 Quintus.Presentation = function(Q) {
-/*
- Q.slide(20,function(stage) {
+ Q.slide(27,function(stage) {
     stage.tiles("level0.json");
     stage.background("game-background.png");
 
@@ -13,7 +12,84 @@ Quintus.Presentation = function(Q) {
       Q("Presenter").first().add("tween").set({ angle: 0, standing: -0.5 }).animate({ angle: 45, y: -500, x: 1023 },1.5,null).del("2d");
     });
  });
- */
+
+
+Q.slide(26,function(stage) {
+  stage.tiles("level0.json");
+  bg = stage.background("game-background.png").set({opacity: 1 });
+
+  var title =stage.title("So...I wrote a book");
+
+  stage.point("...And I'm giving a few away");
+
+  var book = stage.insert(new Q.Sprite({ asset: "book.jpg", x: 290, y: 150, type: 0, opacity: 0 }));
+
+  bg.add("tween").animate({ opacity: 0.1 },1,null, { delay: 2 });
+
+  book.add("tween").animate({ opacity: 1.0 },1,null,{ delay: 2 });
+});
+
+
+
+
+
+Q.slide(25,function(stage) {
+  stage.tiles("level0.json");
+  bg = stage.background("game-background.png");
+
+  stage.points();
+  stage.title("Google doesn't\nf*&^%%$# care");
+  stage.point("Chrome for Android has a significant\n   DOM/Canvas zIndex issue");
+  stage.point("Makes using DOM element for UI impossible");
+  stage.point("Bug 142613");
+  stage.point("Reported 2 Months Ago, unconfirmed");
+
+});
+
+
+
+
+Q.slide(24,function(stage) {
+  stage.tiles("level0.json");
+  bg = stage.background("game-background.png");
+
+  stage.points();
+  stage.title("Technical Limitations:\nKnow 'em");
+  stage.point("< IE9 - don't even try Canvas/fallbacks");
+  stage.point("Canvas still fill-rate limited on most devices");
+  stage.point("Device rotation sucks");
+  stage.point("WP7.5 Has no standard multi-touch");
+  stage.point("Sound, even in iOS6 is limited");
+  stage.point("Know your stacking/scaling tricks");
+
+});
+
+
+
+Q.slide(23,function(stage) {
+  stage.tiles("level0.json");
+  bg = stage.background("game-background.png");
+
+  stage.points();
+  stage.title("Client Work");
+  stage.point("There's $$$ here...");
+  stage.point("... but please, set expectations");
+  stage.point("Pick specific devices / browsers to support");
+  stage.point("You need access to hardware for testing");
+  stage.point("Aspect Ratios are the enemy");
+  stage.point("Document (read: contract) all specifics");
+
+});
+
+Q.slide(22,function(stage) {
+  stage.tiles("level0.json");
+  bg = stage.background("game-background.png");
+
+  stage.points();
+  stage.title("Mobile HTML5 Games:\nLessons Learned");
+  stage.point("1. Client Lessons")
+  stage.point("2. Technical Lessons")
+});
 
  Q.slide(21,function(stage) {
     stage.tiles("level0.json");
@@ -371,7 +447,7 @@ Quintus.Presentation = function(Q) {
     'hype_cycle.png', 'game-background2.png', 'windows8-background.png', 'level_big_gap.json',
     'html5logo.jpg', 'biolab.png', 'limejs.png', 'easeljs.png', 'crafty.png', 'threejs.jpg',
     "quintus.png", "construct2.png", "gamemaker.png", "playcanvas.png", "vaporware.png",
-    "moneybg.jpg", "html5sponsors.png" 
+    "moneybg.jpg", "html5sponsors.png", "book.jpg"
   ]);
 
   // Called after preload
