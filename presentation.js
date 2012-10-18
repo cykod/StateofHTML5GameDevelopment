@@ -463,6 +463,10 @@ Q.slide(22,function(stage) {
     stage.insert(new Q.Sprite({ sheet: "cab", x: 500, y: 700 - 158, type: 0, z: 11 }));
     stage.insert(new Q.Sprite({ sheet: "hydrant", x: 100, y: 700 - 110, type: 0, z: 11 }));
 
+
+    var html = new Q.UI.HTMLElement({ html: '<a href="https://github.com/cykod/StateofHTML5GameDevelopment"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>' });
+
+    stage.insert(html);
  
     
 

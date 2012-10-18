@@ -177,6 +177,7 @@ Quintus.GameNote = function(Q) {
   Q.slide = function(number,sceneFunc) {
 
     Q.scene("slide" + number, function(stage) {
+      _gaq.push(['_trackEvent','Slide','Show',"slide" + number]);
       Q.currentSlide = number;
       stage.presenter = stage.insert(new Q.Presenter());
       sceneFunc(stage);
