@@ -396,6 +396,8 @@ Quintus.GameNote = function(Q) {
         Q.stageScene("slide1");
       }
 
+      Q.el.focus();
+
       /*
       // Fullscreen is slower...
       var goFullscreen = function() {
