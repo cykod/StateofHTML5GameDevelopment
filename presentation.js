@@ -191,6 +191,9 @@ Q.slide(22,function(stage) {
    stage.on("10%",function() {
      stage.triggerScroller();
    });
+
+
+   stage.insert(new Q.UI.Text({ label: 'Jump\nHere', color: 'white', x: 300, y: 700, z: 11, lineHeight: 1, align: 'center' }));
   });
 
   Q.slide(15,function(stage) {
