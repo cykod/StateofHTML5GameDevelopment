@@ -364,7 +364,9 @@ Quintus.GameNote = function(Q) {
 
   Q.start = function() {
     Q.input.keyboardControls();
-    Q.input.touchControls({
+
+    if(Q.cssWidth >= 1024) {
+      Q.input.touchControls({
         controls:  [ ['left','<' ],
                      ['right','>' ],
                      [],
@@ -376,8 +378,25 @@ Quintus.GameNote = function(Q) {
                      [],
                      ['action', 'a' ]]
       });
+    } else {
+      Q.input.touchControls({
+        controls:  [ ['left','<' ],
+                     ['right','>' ],
+                     [],
+                     [],
+                     [],
+                     [],
+                     ['action', 'a' ]]
+      });
+
+    }
     Q.touch(Q.SPRITE_UI,[1,0]);
     Q.input.drawButtons = Q.drawInputButtons;
+
+    if(Q.touchDevice) {
+      document.getElementById("attribution").style.display = "none";
+      document.getElementById("social").style.display = "none";
+    }
 
     Q.preload(function() {
       Q.presentationSetup();
@@ -449,8 +468,8 @@ window.addEventListener("load",function(e) {
 
 
   window.Q= Quintus()
-                 .include("Sprites, Input, Scenes, Anim, Touch, 2D, UI, GameNote, Presentation")
-                 .setup({ width: width, height: height, maximize: 'touch', upsampleWidth: 720 })
+                 .include("Sprites, Input, Scenes, Anim, Touch, 2D, UI, DOM, GameNote, Presentation")
+                 .setup({ width: width, height: height, maximize: 'resize' })
                  .start();
 
 });

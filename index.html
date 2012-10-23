@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>The State of Mobile HTML5 Game Development</title>
-<meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+<meta name="viewport" content="width=device-width, user-scalable=0,  initial-scale=1.0, maximum-scale=1.0"/>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
  <!-- Le fav and touch icons -->
@@ -31,10 +31,11 @@
 <script src='lib/quintus_anim.js'></script>
 <script src='lib/quintus_2d.js'></script>
 <script src='lib/quintus_ui.js'></script>
+<script src='lib/quintus_dom.js'></script>
 <script src='gamenote.js'></script>
 <script src='presentation.js'></script>
 <style>
-body { max-width:1024px; margin:0 auto; }
+body { margin:0 auto; }
  canvas {
    z-index:0;
  }
@@ -55,7 +56,7 @@ body { max-width:1024px; margin:0 auto; }
 </head>
 <body>
 <div style='max-width:1024px;margin:0 auto;position:relative;'>
-<div style='z-index:5;left:5px;top:5px;position:absolute;'>
+<div style='z-index:5;left:5px;top:5px;position:absolute;' id='social'>
 <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style ">
   <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
