@@ -38,11 +38,12 @@ Q.slide(25,function(stage) {
   bg = stage.background("background5.png");
 
   stage.points();
-  stage.title("Google doesn't\nf*&^%%$# care");
+  stage.title("Chrome Bug");
   stage.point("Chrome for Android has a significant\n   DOM/Canvas zIndex issue");
-  stage.point("Makes using DOM element for UI impossible");
+  stage.point("Makes using DOM elements w/ canvas impossible");
   stage.point("Bug 142613");
-  stage.point("Reported 2 Months Ago, unconfirmed");
+  stage.point("Reported 2 Months Ago, still unconfirmed");
+  stage.point("Please star");
 
 });
 
