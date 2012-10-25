@@ -189,8 +189,8 @@ Quintus.GameNote = function(Q) {
 
   Q.activeSlideStage = 0;
 
-  Q.transitionSlide = function(from,to) {
-    Q.disableHashChange = true;
+  Q.transitionSlide = function(from,to,skipDisable) {
+    if(!skipDisable) { Q.disableHashChange = true; }
     window.location.hash = "slide" + to;
 
     if(Q.inTransition) return;
@@ -427,7 +427,7 @@ Quintus.GameNote = function(Q) {
         } 
         
         if(sceneName && Q.scene(sceneName)) { 
-          Q.stageScene(sceneName);
+          Q.transitionSlide(Q.currentSlide,parseInt(sceneName.substr(5),10),true);
         } 
       }
 
