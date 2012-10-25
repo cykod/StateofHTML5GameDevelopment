@@ -190,6 +190,7 @@ Quintus.GameNote = function(Q) {
   Q.activeSlideStage = 0;
 
   Q.transitionSlide = function(from,to) {
+    Q.disableHashChange = true;
     window.location.hash = "slide" + to;
 
     if(Q.inTransition) return;
@@ -413,6 +414,21 @@ Quintus.GameNote = function(Q) {
         Q.stageScene(sceneName);
       } else {
         Q.stageScene("slide1");
+      }
+
+      window.onhashchange = function() {
+        if(Q.disableHashChange) {
+          Q.disableHashChange = false;
+          return;
+        }
+        var sceneName;
+        if(window.location.hash !== "") {
+          sceneName = window.location.hash.split("#")[1];
+        } 
+        
+        if(sceneName && Q.scene(sceneName)) { 
+          Q.stageScene(sceneName);
+        } 
       }
 
       Q.el.focus();
