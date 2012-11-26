@@ -19,8 +19,8 @@ Quintus.Presentation = function(Q) {
 Q.Sprite.extend("Horse",{
   init: function(p) {
     this._super(p,{
-      speed: Math.random()/2,
-      baseSpeed: Math.random()/2,
+      speed: Math.random()/2 + 0.1,
+      baseSpeed: Math.random()/2 + 0.1,
       largeSpeed: Math.random()*3,
       rotSpeed: 5 + Math.random() * 20,
       rotDist: 10 + Math.random() * 20,
@@ -45,13 +45,13 @@ Q.Sprite.extend("Horse",{
     if(this.p.going && !this.p.stopped) { 
       this.p.x += Math.abs(this.p.speed * Math.cos(this.p.cnt * this.p.rotSpeed) ) +
                   this.p.baseSpeed +
-                  + Math.max(0,this.p.largeSpeed * Math.sin(-2*Math.PI + this.p.cnt * Math.PI * 2 / 20));
+                  + Math.max(0,this.p.largeSpeed * Math.sin(-2*Math.PI + this.p.cnt * Math.PI * 2 / 30));
 
     }
 
     if(this.p.x > 950) {
         var stage = this.parent;
-        if(!this.p.stopped && stage.winners < 3) {
+        if(!this.p.stopped) {
         stage.winners++;
         var pt = stage.point("#" + stage.winners + " - " + this.p.name);
         pt.p.opacity = 1;
@@ -78,7 +78,7 @@ Q.slide(29,function(stage) {
   var lookup = {};
   var users = [];
 
-  $.getJSON("http://search.twitter.com/search.json?q=%23html5boston&include_entities=true&with_twitter_user_id=true&result_type=mixed&rpp=100&callback=?",function(data) {
+  $.getJSON("http://search.twitter.com/search.json?q=%23mit&include_entities=true&with_twitter_user_id=true&result_type=mixed&rpp=100&callback=?",function(data) {
 
     $.each(data.results,function(index,tweet) {
       if(!lookup[tweet.from_user]) {
@@ -90,20 +90,18 @@ Q.slide(29,function(stage) {
       }
     });
 
-    users = Q._shuffle(users).slice(0,9);
+    users = Q._shuffle(users).slice(0,10);
 
     var images  = Q._map(users,function(user) {
       return user.image;
     });
 
-    console.log(images);
     images = Q._uniq(images);
-    console.log(images);
 
     Q.load(images,function() {
       Q._each(users,function(user,i) {
         stage.insert(
-          new Q.Horse({ asset: user.image, y: 100 + i * 50, x: 20, z: 2, name: user.name })
+          new Q.Horse({ asset: user.image, y: 130 + i * 50, x: 20, z: 2, name: user.name })
         )
       });
     });
@@ -425,7 +423,7 @@ Q.slide(25,function(stage) {
     init: function(p) {
       this._super(p, {
         "sheet": "ground",
-        y: 693,
+        y: 693 - 15,
         x: p.n * 85 + 200,
         frame: p.n + 2,
         sound: "orchestra" + p.n,
@@ -504,7 +502,7 @@ Q.slide(25,function(stage) {
         w: 1024,
         h: 50,
         x: 512,
-        y: 660,
+        y: 645,
         shape: "block",
         type: "static"
       })

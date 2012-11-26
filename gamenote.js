@@ -109,7 +109,7 @@ Quintus.GameNote = function(Q) {
       }
 
       this.on("point",pt,function(num) {
-        if(pointNum == num) {
+        if(pointNum == num && pt.hidden) {
           pt.hidden = false;
           pt.animate({ opacity: 1},1,Q.Easing.Quadratic.In);
         }
