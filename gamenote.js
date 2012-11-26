@@ -7,7 +7,7 @@ Quintus.GameNote = function(Q) {
         dataAsset: tileAsset,
         z: 1,
         sheet: "ground", tileW: 64, tileH: 64,
-        y: -10
+        y: -25
       }));
     },
 
@@ -350,7 +350,7 @@ Quintus.GameNote = function(Q) {
 
         if(control[0]) {
           var x = i * keypad.unit + keypad.gutter,
-              y = keypad.bottom - 70;
+              y = keypad.bottom - 85;
               key = Q.inputs[control[0]];
 
           ctx.globalAlpha = key ? 0.5 : 1.0;
@@ -400,6 +400,7 @@ Quintus.GameNote = function(Q) {
     }
 
     Q.preload(function() {
+      $("#loading").hide();
       Q.presentationSetup();
 
       var sceneName;
@@ -449,7 +450,14 @@ Quintus.GameNote = function(Q) {
 
       Q.el.addEventListener("click",goFullscreen);
       */
-    });
+    },
+    { 
+      progressCallback: function(loaded,total) {
+        $("#loading_progress").css({width: Math.floor(loaded/total*100) + "%" });
+      }
+
+    }
+    );
 
     return Q;
 

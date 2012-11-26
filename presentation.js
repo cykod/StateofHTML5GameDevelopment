@@ -1,5 +1,7 @@
 Quintus.Presentation = function(Q) {
- Q.slide(27,function(stage) {
+
+
+ Q.slide(30,function(stage) {
     stage.tiles("level0.json");
     stage.background("background5.png");
 
@@ -14,7 +16,108 @@ Quintus.Presentation = function(Q) {
  });
 
 
-Q.slide(26,function(stage) {
+Q.Sprite.extend("Horse",{
+  init: function(p) {
+    this._super(p,{
+      speed: Math.random()/2,
+      baseSpeed: Math.random()/2,
+      largeSpeed: Math.random()*3,
+      rotSpeed: 5 + Math.random() * 20,
+      rotDist: 10 + Math.random() * 20,
+      cnt: 0,
+      type: 0
+    });
+
+
+    var self = this;
+    this.on("inserted",function(stage) {
+      stage.on("go",function() {
+        self.p.going = true;
+        self.p.cnt = 0;
+      });
+    });
+  },
+
+
+
+
+  step: function(dt) {
+    if(this.p.going && !this.p.stopped) { 
+      this.p.x += Math.abs(this.p.speed * Math.cos(this.p.cnt * this.p.rotSpeed) ) +
+                  this.p.baseSpeed +
+                  + Math.max(0,this.p.largeSpeed * Math.sin(-2*Math.PI + this.p.cnt * Math.PI * 2 / 20));
+
+    }
+
+    if(this.p.x > 950) {
+        var stage = this.parent;
+        if(!this.p.stopped && stage.winners < 3) {
+        stage.winners++;
+        var pt = stage.point("#" + stage.winners + " - " + this.p.name);
+        pt.p.opacity = 1;
+      }
+      this.p.stopped = true;
+      
+
+    }
+
+    this.p.cnt += dt;
+    this.p.angle = Math.cos(this.p.cnt * this.p.rotSpeed) / Math.PI * this.p.rotDist;
+
+    this._super(dt);
+
+  }
+});
+
+Q.slide(29,function(stage) {
+  stage.tiles("level0.json");
+  stage.background("background5.png");
+
+  stage.title("#html5boston");
+
+  var lookup = {};
+  var users = [];
+
+  $.getJSON("http://search.twitter.com/search.json?q=%23html5boston&include_entities=true&with_twitter_user_id=true&result_type=mixed&rpp=100&callback=?",function(data) {
+
+    $.each(data.results,function(index,tweet) {
+      if(!lookup[tweet.from_user]) {
+        users.push({
+          name: tweet.from_user,
+          image: tweet.profile_image_url
+        });
+        lookup[tweet.from_user] = true;
+      }
+    });
+
+    users = Q._shuffle(users).slice(0,9);
+
+    var images  = Q._map(users,function(user) {
+      return user.image;
+    });
+
+    console.log(images);
+    images = Q._uniq(images);
+    console.log(images);
+
+    Q.load(images,function() {
+      Q._each(users,function(user,i) {
+        stage.insert(
+          new Q.Horse({ asset: user.image, y: 100 + i * 50, x: 20, z: 2, name: user.name })
+        )
+      });
+    });
+  });
+
+  stage.winners = 0;
+
+  stage.on("40%",function() {
+    console.log("Go1");
+    stage.trigger("go");
+  });
+});
+
+Q.slide(28,function(stage) {
   stage.tiles("level0.json");
   bg = stage.background("background5.png").set({opacity: 1 });
 
@@ -30,27 +133,7 @@ Q.slide(26,function(stage) {
 });
 
 
-
-
-
-Q.slide(25,function(stage) {
-  stage.tiles("level0.json");
-  bg = stage.background("background5.png");
-
-  stage.points();
-  stage.title("Chrome Bug");
-  stage.point("Chrome for Android has a significant\n   DOM/Canvas zIndex issue");
-  stage.point("Makes using DOM elements w/ canvas impossible");
-  stage.point("Bug 142613");
-  stage.point("Reported 2 Months Ago, still unconfirmed");
-  stage.point("Please star");
-
-});
-
-
-
-
-Q.slide(24,function(stage) {
+Q.slide(27,function(stage) {
   stage.tiles("level0.json");
   bg = stage.background("background5.png");
 
@@ -59,7 +142,7 @@ Q.slide(24,function(stage) {
   stage.point("< IE9 - don't even try Canvas/fallbacks");
   stage.point("Canvas still fill-rate limited on most devices");
   stage.point("Device rotation sucks");
-  stage.point("WP7.5 Has no standard multi-touch");
+  stage.point("WP8 vs. iOS and Android differences");
   stage.point("Sound, even in iOS6 is limited");
   stage.point("Know your stacking/scaling tricks");
 
@@ -67,7 +150,7 @@ Q.slide(24,function(stage) {
 
 
 
-Q.slide(23,function(stage) {
+Q.slide(26,function(stage) {
   stage.tiles("level0.json");
   bg = stage.background("background4.png");
 
@@ -82,7 +165,7 @@ Q.slide(23,function(stage) {
 
 });
 
-Q.slide(22,function(stage) {
+Q.slide(25,function(stage) {
   stage.tiles("level0.json");
   bg = stage.background("background3.png");
 
@@ -90,7 +173,7 @@ Q.slide(22,function(stage) {
   stage.point("Client Lessons & Technical Lessons")
 });
 
- Q.slide(21,function(stage) {
+ Q.slide(24,function(stage) {
     stage.tiles("level0.json");
     bg = stage.background("background2.png");
     bg.p.opacity = 0.5;
@@ -110,7 +193,7 @@ Q.slide(22,function(stage) {
 
 
 
- Q.slide(20,function(stage) {
+ Q.slide(23,function(stage) {
     stage.tiles("level0.json");
     bg = stage.background("moneybg.jpg");
     bg.p.opacity = 0.5;
@@ -126,7 +209,7 @@ Q.slide(22,function(stage) {
     stage.point("But: Moblyng ($10M & bankrupt)")
  });
 
- Q.slide(19,function(stage) {
+ Q.slide(22,function(stage) {
     stage.tiles("level0.json");
     bg = stage.background("moneybg.jpg");
     bg.p.opacity = 0.5;
@@ -135,14 +218,14 @@ Q.slide(22,function(stage) {
     stage.point("Can you make money with HTML5 Games?", { color: "#333", y: 300 });
  });
 
- Q.slide(18,function(stage) {
+ Q.slide(21,function(stage) {
     stage.tiles("level0.json");
     stage.background("background4.png");
 
     stage.points();
     stage.title("HTML5 as Language");
 
-    stage.point("Ejecta - Open-Source JavaScript,\nCanvas, & Audio implementation in iOS\nhttp://impactjs.com/ejecta");
+    stage.point("Ejecta - Open-Source JavaScript,\nCanvas, & Audio implementation in iOS");
     stage.point("CocoonJS - Cloud based wrapper\nStarted targeting Android (but iOS supported)\nw/ a Cloud-based Builder");
     stage.point("AppMobi - Cloud based, commercial builder\nFree to use, but pay for cloud services");
 
@@ -150,7 +233,7 @@ Q.slide(22,function(stage) {
 
 
 
- Q.slide(17,function(stage) {
+ Q.slide(20,function(stage) {
     stage.tiles("level0.json");
     stage.background("background3.png");
 
@@ -158,9 +241,11 @@ Q.slide(22,function(stage) {
 
 
     stage.scroller("construct2.png","Construct 2","- Commercial IDE\n- Free/$119/$399 Editions\n- Windows Only\n- Whole lot of Target Platforms\n  (iOS, Android, HTML5, Windows8)\n- \"No Programming Required\n- Lots of Docs, Tutorials, Community");
-    stage.scroller("gamemaker.png","GameMaker","- Commercial IDE\n- $99.99 + HTML5 Export ($99.99)\n- IDE Windows Only\n- Export to iOS, Android w/ $199/platform\n- Games");
+    stage.scroller("gamemaker.png","GameMaker","- Commercial IDE\n- $99.99 + HTML5 Export ($99.99)\n- IDE Windows Only\n- Export to iOS, Android w/ $199/platform");
 
     stage.scroller("playcanvas.png","PlayCanvas","- Commercial IDE\n- Unreleased (but plenty of demos)\n- 3D Focused with 3D WebGL Engine");
+
+    stage.scroller("bananabread.png","Mozilla's Bananbread","- (And Emscripten in General)\n- Any LLVM bitcode to JavaScript\n- Replace OpenGL ES w/ WebGL\n- See http://emscripten.org");
 
     stage.scroller("vaporware.png","And some more...","- The Artillery Platform (Unreleased)\n- Game Closure (Unreleased)\n- Spaceport NEO (Unreleased)\n- TreSensa (Available)\n- SpinPunch (Unreleased)\n- PlayCraft (Beta)");
 
@@ -171,7 +256,7 @@ Q.slide(22,function(stage) {
 
 
 
-  Q.slide(16,function(stage) {
+  Q.slide(19,function(stage) {
     stage.tiles("level0.json");
     stage.background("background4.png");
 
@@ -197,7 +282,7 @@ Q.slide(22,function(stage) {
    stage.insert(new Q.UI.Text({ label: 'Jump\nHere', color: 'white', x: 300, y: 700, z: 11, lineHeight: 1, align: 'center' }));
   });
 
-  Q.slide(15,function(stage) {
+  Q.slide(18,function(stage) {
     stage.tiles("level0.json");
     stage.background("background3.png");
 
@@ -209,12 +294,25 @@ Q.slide(22,function(stage) {
     stage.point("2. Treat it as a Target platform");
     stage.point("   - Use a Game IDE or another language");
     stage.point("3. Treat it as a Development Language");
-    stage.point("   - Developer in JS, deploy to Native");
+    stage.point("   - Develop in JS, deploy to Native");
   });
 
 
 
-  Q.slide(14,function(stage) {
+  Q.slide(17,function(stage) {
+    stage.tiles("level0.json");
+    stage.background("background4.png");
+
+    stage.points();
+    stage.title("\"HTML5\" Game\nTechnologies");
+
+    stage.point("1. 2D Canvas - Paths and Bitmaps");
+    stage.point("2. CSS3 - DOM + Hardward Accelerated Transforms");
+    stage.point("3. SVG - Performance lacking but soon... (D3)");
+    stage.point("4. 3D Canvas - WebGL Either in 2D or 3D");
+  });
+
+  Q.slide(16,function(stage) {
     stage.tiles("level.json");
     stage.background("background4.png");
 
@@ -233,9 +331,8 @@ Q.slide(22,function(stage) {
 
   });
 
-
  
-  Q.slide(13,function(stage) {
+  Q.slide(15,function(stage) {
     stage.tiles("level0.json");
     stage.background("html5logo.png");
 
@@ -255,7 +352,7 @@ Q.slide(22,function(stage) {
     stage.isVisible=true;
   });
 
-  Q.slide(12,function(stage) {
+  Q.slide(14,function(stage) {
     stage.tiles("level_big_gap.json");
     stage.background("background2.png");
 
@@ -274,7 +371,7 @@ Q.slide(22,function(stage) {
     });
   }); 
 
-  Q.slide(11,function(stage) {
+  Q.slide(13,function(stage) {
     stage.tiles("level0.json");
     stage.background("background3.png");
 
@@ -292,8 +389,7 @@ Q.slide(22,function(stage) {
 
   });
 
- 
-  Q.slide(10,function(stage) {
+  Q.slide(12,function(stage) {
     stage.tiles("level0.json");
     stage.background("windows8-background.png");
 
@@ -309,9 +405,9 @@ Q.slide(22,function(stage) {
     stage.titlePoint.animate({ opacity: 1 });
     stage.container.stop();
     stage.isVisible=true;
-  });
+  }); 
 
- Q.slide(9,function(stage) {
+ Q.slide(11,function(stage) {
     stage.tiles("level0.json");
     var bg = stage.background("background3.png");
     bg.p.opacity = 0.6;
@@ -325,6 +421,139 @@ Q.slide(22,function(stage) {
     stage.insert(iframe);
   }); 
 
+  Q.Sprite.extend("SoundBlock",{
+    init: function(p) {
+      this._super(p, {
+        "sheet": "ground",
+        y: 693,
+        x: p.n * 85 + 200,
+        frame: p.n + 2,
+        sound: "orchestra" + p.n,
+        z: 2
+      });
+
+      this.on("scroller",this,"hit")
+    },
+
+    hit: function() {
+      if(Q.SoundBlock.lastBlockHit != this) {
+        Q.SoundBlock.lastBlockHit = this;
+        Q.play(this.p.sound);
+      }
+      var cur = this;
+      clearTimeout(Q.SoundBlock.blockTimeout);
+      Q.SoundBlock.blockTimeout = setTimeout(function() {
+        if(Q.SoundBlock.lastBlockHit == cur) {
+          Q.SoundBlock.lastBlockHit = null;
+        }
+      }, 200);
+    }
+  });
+
+
+
+  Q.slide(10,function(stage) {
+    stage.tiles("level0.json");
+    stage.background("background4.png");
+
+    stage.title("Box2D Physics");
+    stage.add("world");
+
+    stage.presenter.p.shape = "block";
+    stage.presenter.p.cx = 10;
+    stage.presenter.p.cy = -40;
+    stage.presenter.p.x = 100;
+    stage.presenter.add("physics").del("2d");
+    stage.presenter.off("step",stage.presenter.platformerControls);
+
+
+    stage.presenter.physics._body.SetFixedRotation(true);
+
+    stage.presenter.on("step",function(dt) {
+      var p = this.p;
+
+      var vx = 0, vy = 0;
+
+      if(Q.inputs['left']) {
+        vx = -p.speed;
+        p.direction = 'left';
+      } else if(Q.inputs['right']) {
+        vx = p.speed;
+        p.direction = 'right';
+      } else {
+        vx = 0;
+      }
+
+      if(vx) {
+        stage.presenter.physics.force(vx*10,0);
+      }
+
+      if(p.landed > 0 && (Q.inputs['up'] || Q.inputs['action'])) {
+        p.landed = -0.5;
+        stage.presenter.physics.impulse(15000,-15000);
+
+      }
+      p.landed += dt;
+
+
+    });
+
+
+    stage.insert(
+      new Q.Sprite({ 
+        w: 1024,
+        h: 50,
+        x: 512,
+        y: 660,
+        shape: "block",
+        type: "static"
+      })
+      ).add("physics");
+
+
+    for(var x = 0; x < 3;x++) {
+      for(var y = 0;y < 8;y++) {
+        stage.insert(
+          new Q.Sprite({ 
+            w: 64,
+            h: 64,
+            x: 300 + x * 75,
+            y: -50 + y * 70,
+            cx: 32,
+            cy: 32,
+            z:3,
+            shape: "block",
+            sheet: "ground",
+            frame: 6
+          }).add("physics")
+          );
+
+      }
+
+    }
+
+
+
+  });
+
+
+
+  Q.slide(9,function(stage) {
+    stage.tiles("level0.json");
+    stage.background("background4.png");
+
+    stage.title("Web Audio on iOS6")
+
+    var lastHit = null;
+    stage.insert(new Q.SoundBlock({ n: 1 }));
+    stage.insert(new Q.SoundBlock({ n: 2 }));
+    stage.insert(new Q.SoundBlock({ n: 3 }));
+    stage.insert(new Q.SoundBlock({ n: 4 }));
+    stage.insert(new Q.SoundBlock({ n: 5 }));
+    stage.insert(new Q.SoundBlock({ n: 6 }));
+
+  });
+
 
 
   Q.slide(8,function(stage) {
@@ -336,8 +565,31 @@ Q.slide(22,function(stage) {
     stage.point("1. Canvas performance is solid (iOS5+, ICS+)");
     stage.point("2. No WebGL, but OpenGL ES-based\n    native wrappers");
     stage.point("3. Web Audio API in iOS6");
-    stage.point("4. Multi-touch now in Android 4+");
+    stage.point("4. Multi-touch now in Android 4+ and Windows Phone");
     stage.point("5. Remote Debugging,\n    iOS 6+, Chrome ICS+");
+
+    if(!Q.stats) {
+      Q.stats = new Stats();
+      Q.stats.setMode(0); // 0: fps, 1: ms
+      $(Q.wrapper).prepend(Q.stats.domElement);
+
+      Q.stats.domElement.style.position = 'absolute';
+      Q.stats.domElement.style.right = '0px';
+      Q.stats.domElement.style.top = '0px';
+
+      $(Q.stats.domElement).css({'zIndex':100});
+    }
+
+    stage.on('prestep',function() {
+      if(Q.stats) { Q.stats.end(); Q.stats.begin(); }
+    
+    })
+
+
+    stage.on("clear",function() {
+      $(Q.stats.domElement).remove();
+      Q.stats = null;
+    });
   });
 
   Q.slide(7,function(stage) {
@@ -426,16 +678,16 @@ Q.slide(22,function(stage) {
     history.animate({ y: 100 }, 1, Q.Easing.Quadratic.Out)
 
 
-    var sp = stage.insert(new Q.Sprite({x : 0, y: 225, z:2, opacity: 0, time: 0 })).add("tween");
+    var sp = stage.insert(new Q.Sprite({x : 0, y: 225, z:0, opacity: 0, time: 0 })).add("tween");
     sp.draw = function(ctx) {
       ctx.save();
       ctx.globalAlpha = this.p.opacity;
-      ctx.fillStyle = "#ffff0d";
+      ctx.fillStyle = "#000000";
       ctx.beginPath();
-      ctx.moveTo(this.p.x - 25,0);
-      ctx.lineTo(this.p.x + 25,0);
-      ctx.lineTo(this.p.x + 5,650);
-      ctx.lineTo(this.p.x - 5,650);
+      ctx.moveTo(this.p.x - 1,0);
+      ctx.lineTo(this.p.x + 1,0);
+      ctx.lineTo(this.p.x + 1,800);
+      ctx.lineTo(this.p.x - 1,800);
     //  ctx.arc(this.p.x,this.p.y,this.p.size,0,Math.PI * 2,true);
       ctx.fill();
       ctx.restore();
@@ -476,16 +728,25 @@ Q.slide(22,function(stage) {
 
   });
 
+  Q.include("Audio");
+  Q.include("Physics");
+
+  Q.audio.enableWebAudioSound();
+
   // Whatever assets you'll need
   Q.preload([
     'sprites.png','sprites.json','game-background.png', 'sign.png', 'history.png',
     'level.json', 'level2.json', 'level0.json', 'zuckerberg.jpg', 'level_gap.json',
     'hype_cycle.png',  'windows8-background.png', 'level_big_gap.json',
     'html5logo.png', 'biolab.png', 'limejs.png', 'easeljs.png', 'crafty.png', 'threejs.jpg',
+    "bananabread.png",
     "quintus.png", "construct2.png", "gamemaker.png", "playcanvas.png", "vaporware.png",
     "moneybg.jpg", "html5sponsors.png", "book.jpg", "background2.png", "background3.png",
-    "background4.png","background5.png"
+    "background4.png","background5.png",
+    "orchestra1.mp3",  "orchestra2.mp3", "orchestra3.mp3", "orchestra4.mp3",
+    "orchestra5.mp3", "orchestra6.mp3"
   ]);
+
 
   // Called after preload
   Q.presentationSetup = function() {
