@@ -78,7 +78,7 @@ Q.slide(29,function(stage) {
   var lookup = {};
   var users = [];
 
-  $.getJSON("http://search.twitter.com/search.json?q=%23mit&include_entities=true&with_twitter_user_id=true&result_type=mixed&rpp=100&callback=?",function(data) {
+  $.getJSON("http://search.twitter.com/search.json?q=%23html5boston&include_entities=true&with_twitter_user_id=true&result_type=mixed&rpp=100&callback=?",function(data) {
 
     $.each(data.results,function(index,tweet) {
       if(!lookup[tweet.from_user]) {
@@ -110,7 +110,6 @@ Q.slide(29,function(stage) {
   stage.winners = 0;
 
   stage.on("40%",function() {
-    console.log("Go1");
     stage.trigger("go");
   });
 });
